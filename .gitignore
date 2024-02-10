@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Server/OleksiiHavryk.Finances.API/appsettings.Production.json
+/Server/OleksiiHavryk.Finances.API/appsettings.Staging.json
