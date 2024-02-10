@@ -1,0 +1,144 @@
+<div (click)="toggle(recordPanel, chevron)" class="px-3 py-2 list-group-item-action d-flex justify-content-between">
+    <span>{{record.title | titlecase}}</span>
+    <div class="d-flex">
+        <button class="mx-1 btn btn-sm btn-danger" 
+            (click)="deleteRecord($event)">
+            <i class="bi bi-x-lg"></i>
+        </button>
+        <i #chevron class="mx-1 bi bi-chevron-down"
+            [style]="{rotate: opened ? '180deg' : '0deg'}"></i>
+    </div>
+</div>
+<div #recordPanel [style]="{display: opened ? 'block' : 'none !important'}">
+    <div class="panel">
+        <div class="d-flex-nonimportant">
+            <section class="flex-grow-1">
+                <ul class="m-auto p-3 list-group">
+                    <h4 class="display-8 text-center">Debit</h4>
+                    <div *ngIf="debit.length > 0">
+                        <li *ngFor="let debitEntry of debit"            
+                            class="list-group-item list-group-item-action d-flex justify-content-between"
+                            [ngClass]="{'text-secondary': isHidden(debitEntry)}">
+                            <span>{{debitEntry.name}}</span>
+                            <span>
+                                <span>{{debitEntry.count}}{{currenciesService.currencyById(debitEntry.currencyId).symbol}}</span>
+                                <button class="mx-1 btn btn-sm btn-primary text-white" (click)="toggleEntryVisibility(debitEntry)">
+                                    <i [ngClass]="{
+                                        'bi-eye': isHidden(debitEntry), 
+                                        'bi-eye-slash': isHidden(debitEntry) === false
+                                        }"
+                                        class="bi">
+                                    </i>
+                                </button>
+                                <button class="mx-1 btn btn-sm btn-danger" (click)="deleteDebit(debitEntry)">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                            </span>
+                        </li>
+                    </div>
+                    <div *ngIf="debit.length === 0">
+                        <p class="text-center p-3">Any of debit entry currently is not containing in the record.</p>
+                    </div>
+                </ul>
+            </section>
+            <section class="flex-grow-1">
+                <ul class="m-auto p-3 list-group">
+                    <h4 class="display-8 text-center">Credit</h4>
+                    <div *ngIf="credit.length > 0">
+                        <li *ngFor="let creditEntry of credit"            
+                            class="list-group-item list-group-item-action d-flex justify-content-between"
+                            [ngClass]="{'text-secondary': isHidden(creditEntry)}">
+                            <span>{{creditEntry.name}}</span>
+                            <span>
+                                <span>{{creditEntry.count}}{{currenciesService.currencyById(creditEntry.currencyId).symbol}}</span>
+                                <button class="mx-1 btn btn-sm btn-primary text-white" (click)="toggleEntryVisibility(creditEntry)">
+                                    <i [ngClass]="{
+                                        'bi-eye': isHidden(creditEntry), 
+                                        'bi-eye-slash': isHidden(creditEntry) === false
+                                        }"
+                                        class="bi">
+                                    </i>
+                                </button>
+                                <button class="mx-1 btn btn-sm btn-danger" (click)="deleteCredit(creditEntry)">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                            </span>
+                        </li>
+                    </div>
+                    <div *ngIf="credit.length === 0">
+                        <p class="text-center p-3">Any of credit entry currently is not containing in the record.</p>
+                    </div>
+                </ul>
+            </section>
+        </div>
+        <div class="d-flex-nonimportant">
+            <section class="flex-grow-1">
+                <form class="p-2 m-auto">
+                    <app-input [control]="nameDebit" type="text" name="Name">
+                    </app-input>
+                    <app-input [control]="costDebit" type="number" name="Cost">
+                    </app-input>
+                    <div class="form-group m-2">
+                        <label>Choose currency</label>
+                        <select [formControl]="currencyDebit" 
+                            [ngClass]="{
+                                'is-valid': currencyDebit.touched && currencyDebit.dirty && 
+                                currencyDebit.valid,
+                                'is-invalid': currencyDebit.touched && currencyDebit.dirty && 
+                                currencyDebit.invalid,
+                            }"
+                            class="form-select">
+                            <option *ngFor="let currency of currenciesService.currencies" [value]="currency.name">
+                                {{currency.symbol}} | {{currency.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary mx-2" (click)="addDebit()">Create</button>
+                        <button class="btn btn-secondary mx-2" (click)="clearDebit()">Clear</button>
+                    </div>
+                </form>
+            </section>
+            <section class="flex-grow-1">
+                <form class="p-2 m-auto">
+                    <app-input [control]="nameCredit" type="text" name="Name">
+                    </app-input>
+                    <app-input [control]="costCredit" type="number" name="Cost">
+                    </app-input>
+                    <div class="form-group m-2">
+                        <label>Choose currency</label>
+                        <select [formControl]="currencyCredit" 
+                            [ngClass]="{
+                                'is-valid': currencyCredit.touched && currencyCredit.dirty && 
+                                currencyCredit.valid,
+                                'is-invalid': currencyCredit.touched && currencyCredit.dirty && 
+                                currencyCredit.invalid,
+                            }"
+                            class="form-select">
+                            <option *ngFor="let currency of currenciesService.currencies" [value]="currency.name">
+                                {{currency.symbol}} | {{currency.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary mx-2" (click)="addCredit()">Create</button>
+                        <button class="btn btn-secondary mx-2" (click)="clearCredit()">Clear</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between px-3 py-2 fw-bold">
+        <div class="d-flex flex-column justify-content-end">
+            Result:
+        </div>
+        <div class="text-end">
+            <select #resultCurrencyElement class="form-select" (change)="changeCurrency(resultCurrencyElement)">
+                <option *ngFor="let currency of currenciesService.currencies" [value]="currency.id">
+                    {{currency.symbol}} | {{currency.name}}
+                </option>
+            </select>
+            <span>{{calculateResult()}}{{this.resultCurrency.symbol}}</span>
+        </div>
+    </div>
+</div>

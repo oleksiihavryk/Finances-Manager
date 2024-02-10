@@ -1,0 +1,23 @@
+<ul class="mx-5 list-group">
+    <h3 class="text-center display-5">Records</h3>
+    <div *ngIf="recordsService.isHaveAny">
+        <li class="list-group-item p-0" *ngFor="let record of recordsService.records">
+            <app-record 
+                [record]="record" 
+                [opened]="isOpened(record.id)"
+                (removeEntry)="removeEntry($event)" 
+                (removeRecord)="removeRecord($event)"
+                (open)="addToOpened($event)"
+                (close)="removeFromOpened($event)"></app-record>
+        </li>
+    </div>
+    <div *ngIf="recordsService.isHaveAny === false">
+        <p class="text-center p-3">The system is currently not containing any records.</p>
+    </div>
+</ul>
+<app-modal [id]="deleteRecordModalId" [afterCloseAction]="createRecordRemoveAction()" [isQuestion]="true">
+    Are you sure about deleting '{{this.deletingRecord?.title}}' record from the system?
+</app-modal>
+<app-modal [id]="deleteEntryModalId" [afterCloseAction]="createEntryRemoveAction()" [isQuestion]="true">
+    Are you sure about deleting '{{this.deletingEntry?.name}}' entry from the system?
+</app-modal>
