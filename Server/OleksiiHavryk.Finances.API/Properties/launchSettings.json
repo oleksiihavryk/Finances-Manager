@@ -1,31 +1,37 @@
-﻿{
+{
   "profiles": {
     "FinancialManager.Resources_Dev": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": false,
-      "applicationUrl": "http://localhost:7000;https://localhost:7001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:7000;https://localhost:7001"
     },
     "FinancialManager.Resources_Stage": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": false,
-      "applicationUrl": "http://localhost:7000;https://localhost:7001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Staging"
-      }
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:7000;https://localhost:7001"
     },
     "FinancialManager.Resources_Prod": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": false,
-      "applicationUrl": "http://localhost:7000;https://localhost:7001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
-      }
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:7000;https://localhost:7001"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {
+        "ASPNETCORE_URLS": "https://+:443;http://+:80"
+      },
+      "publishAllPorts": true,
+      "useSSL": true
     }
   }
 }
