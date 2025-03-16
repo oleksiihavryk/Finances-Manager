@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "OleksiiHavryk.Finances.Client:build:production"
+              "buildTarget": "OleksiiHavryk.Finances.Client:build:production"
             },
             "development": {
-              "browserTarget": "OleksiiHavryk.Finances.Client:build:development"
+              "buildTarget": "OleksiiHavryk.Finances.Client:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "OleksiiHavryk.Finances.Client:build"
+            "buildTarget": "OleksiiHavryk.Finances.Client:build"
           }
         },
         "test": {
