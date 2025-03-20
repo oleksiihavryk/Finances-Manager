@@ -6,9 +6,10 @@ import { CurrenciesService } from 'src/app/shared/services/currencies.service';
 import { RecordsService } from 'src/app/shared/services/records.service';
 
 @Component({
-  selector: 'app-records-list',
-  templateUrl: './records-list.component.html',
-  styleUrls: ['./records-list.component.css']
+    selector: 'app-records-list',
+    templateUrl: './records-list.component.html',
+    styleUrls: ['./records-list.component.css'],
+    standalone: false
 })
 export class RecordsListComponent {
   public idsOfOpenedRecords: string[] = [];

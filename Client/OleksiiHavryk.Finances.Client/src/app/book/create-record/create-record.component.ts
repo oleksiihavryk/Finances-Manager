@@ -4,9 +4,10 @@ import { Record } from 'src/app/shared/domain/record';
 import { RecordsService } from 'src/app/shared/services/records.service';
 
 @Component({
-  selector: 'app-create-record',
-  templateUrl: './create-record.component.html',
-  styleUrls: ['./create-record.component.css']
+    selector: 'app-create-record',
+    templateUrl: './create-record.component.html',
+    styleUrls: ['./create-record.component.css'],
+    standalone: false
 })
 export class CreateRecordComponent {
   public title: FormControl = new FormControl('', [

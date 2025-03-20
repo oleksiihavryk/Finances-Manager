@@ -8,7 +8,7 @@ namespace OleksiiHavryk.Finances.API.DTO;
 public class CurrencyDto
 {
     [Required]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     [Required]
     [MaxLength(128)]
     public string Name { get; set; } = null!;

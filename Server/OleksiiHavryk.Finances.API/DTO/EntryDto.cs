@@ -10,7 +10,7 @@ public class EntryDto
 {
     [Required] public Guid Id { get; set; }
     [Required] public Guid RecordId { get; set; }
-    [Required] public Guid CurrencyId { get; set; }
+    [Required] public int CurrencyId { get; set; }
     [Required]
     [MaxLength(128)]
     public string Name { get; set; } = null!;

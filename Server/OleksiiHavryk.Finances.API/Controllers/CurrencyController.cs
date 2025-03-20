@@ -32,25 +32,4 @@ public class CurrencyController : ControllerBase
         var currenciesDto = _mapper.Map<IEnumerable<CurrencyDto>>(currencies);
         return currenciesDto.Any() ? Ok(currenciesDto) : NoContent();
     }
-    [HttpPost] 
-    public async Task<IActionResult> SaveAsync([FromBody] CurrencyDto currencyDto)
-    {
-        var currency = _mapper.Map<Currency>(currencyDto);
-        var saved = await _repository.SaveAsync(currency);
-        var savedDto = _mapper.Map<CurrencyDto>(saved);
-        return Created(Request.GetDisplayUrl(), savedDto);
-    }
-    [HttpDelete("id/{id:guid}")]
-    public async Task<IActionResult> DeleteAsync([FromRoute] Guid id)
-    {
-        try
-        {
-            await _repository.DeleteAsync(id);
-            return Ok();
-        }
-        catch (IdentifierNotFoundException)
-        {
-            return NotFound(nameof(Currency.Id));
-        }
-    }
 }

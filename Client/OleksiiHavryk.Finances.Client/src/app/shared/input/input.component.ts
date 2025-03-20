@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.css']
+    selector: 'app-input',
+    templateUrl: './input.component.html',
+    styleUrls: ['./input.component.css'],
+    standalone: false
 })
 export class InputComponent {
   public static urlPattern: string = '^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$';

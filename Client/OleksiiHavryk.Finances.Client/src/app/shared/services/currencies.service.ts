@@ -23,23 +23,6 @@ export class CurrenciesService {
   constructor(private httpClient: HttpClient) { 
   }
 
-  public add(curr: Currency): Observable<Currency[]>
-  {
-    return this.httpClient.post<Currency>(this.url, curr).pipe(
-      tap((c) => {
-        console.log(`Currency is created!`),
-        console.log(c)
-      }),
-      switchMap(() => this.updateSet(true))
-    );;
-  }
-  public remove(id: string): Observable<Currency[]>
-  {
-    return this.httpClient.delete<void>(this.url + `/id/${id}`).pipe(
-      tap(() => console.log(`Currency with id '${id}' is deleted!`)),
-      switchMap(() => this.updateSet(true))
-    );
-  }
   public updateSet(updated: boolean): Observable<Currency[]>
   {
     return this.httpClient.get<Currency[]>(this.url).pipe(
@@ -51,7 +34,7 @@ export class CurrenciesService {
       })
     );
   }
-  public currencyById(id: string)
+  public currencyById(id: number)
   {
     return this.innerCurrencies.filter(c => c.id === id)[0];
   }

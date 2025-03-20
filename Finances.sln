@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OleksiiHavryk.Finances.API.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OleksiiHavryk.Finances.API.Data", "Server\OleksiiHavryk.Finances.API.Data\OleksiiHavryk.Finances.API.Data.csproj", "{C042B6AF-30CD-4C4D-B251-AA76F44BDA6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OleksiiHavryk.Finances.API.Core", "Server\OleksiiHavryk.Finances.API.Core\OleksiiHavryk.Finances.API.Core.csproj", "{D8408510-F435-4576-BF5A-F5BE85043611}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C042B6AF-30CD-4C4D-B251-AA76F44BDA6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C042B6AF-30CD-4C4D-B251-AA76F44BDA6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C042B6AF-30CD-4C4D-B251-AA76F44BDA6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8408510-F435-4576-BF5A-F5BE85043611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8408510-F435-4576-BF5A-F5BE85043611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8408510-F435-4576-BF5A-F5BE85043611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8408510-F435-4576-BF5A-F5BE85043611}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{4E9C8FC3-3394-457D-8F1F-3F59A0D63A03} = {8A0C7D8E-39EC-41AF-9388-C5B812E72E13}
 		{E7C5D2E6-B508-4627-B71F-C05D9C057860} = {8A0C7D8E-39EC-41AF-9388-C5B812E72E13}
 		{C042B6AF-30CD-4C4D-B251-AA76F44BDA6C} = {8A0C7D8E-39EC-41AF-9388-C5B812E72E13}
+		{D8408510-F435-4576-BF5A-F5BE85043611} = {8A0C7D8E-39EC-41AF-9388-C5B812E72E13}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E745CFB2-C10C-426D-B463-DEFE789BC4F8}

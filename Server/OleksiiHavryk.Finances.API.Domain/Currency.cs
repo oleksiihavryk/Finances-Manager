@@ -4,7 +4,7 @@
 /// </summary>
 public class Currency
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; } = null!;
     public decimal Value { get; set; }
     public char Symbol { get; set; }

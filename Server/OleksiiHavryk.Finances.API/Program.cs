@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using OleksiiHavryk.Finances.API.Core;
 using OleksiiHavryk.Finances.API.Data;
 using OleksiiHavryk.Finances.API.Data.Interfaces;
 using OleksiiHavryk.Finances.API.Domain;
@@ -14,6 +15,8 @@ var dbConStr = config.GetConnectionString("Default");
 //Services
 services.AddControllers();
 
+services.AddHttpClient();
+
 services.AddDbContext<ResourcesDbContext>(
     opt =>
     {
@@ -23,6 +26,8 @@ services.AddDbContext<ResourcesDbContext>(
     });
 
 services.AddScoped<ExceptionHandlerMiddleware>();
+
+services.AddScoped<ICurrencyScraper, CurrencyScraper>();
 
 services.AddScoped<ICurrencyRepository, CurrencyRepository>();
 services.AddScoped<IRecordRepository, RecordRepository>();

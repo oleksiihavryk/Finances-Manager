@@ -7,4 +7,6 @@ namespace OleksiiHavryk.Finances.API.Data.Interfaces;
 /// </summary>
 public interface IEntryRepository : IRepository<Entry, Guid>
 {
+    public Task<Entry> SaveAsync(Entry saved);
+    public Task DeleteAsync(Guid key);
 }

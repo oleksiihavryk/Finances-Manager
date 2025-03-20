@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Record } from 'src/app/shared/domain/record';
-import * as $ from 'jquery';
+import $ from 'jquery';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Entry } from 'src/app/shared/domain/entry';
 import { CurrenciesService } from 'src/app/shared/services/currencies.service';
@@ -9,9 +9,10 @@ import { Currency } from 'src/app/shared/domain/currency';
 import { RecordHelperService } from 'src/app/shared/services/record-helper.service';
 
 @Component({
-  selector: 'app-record',
-  templateUrl: './record.component.html',
-  styleUrls: ['./record.component.css']
+    selector: 'app-record',
+    templateUrl: './record.component.html',
+    styleUrls: ['./record.component.css'],
+    standalone: false
 })
 export class RecordComponent {
   @Input() public record: Record = {
@@ -32,7 +33,7 @@ export class RecordComponent {
   }
 
   public resultCurrency: Currency = {
-    id: '',
+    id: 0,
     name: 'NONEXIST',
     value: 0,
     symbol: '|NONEXIST|'
@@ -179,7 +180,7 @@ export class RecordComponent {
     this.removeRecord.emit(this.record);
   }
   public changeCurrency(resultCurrencyElement: HTMLSelectElement) {
-    this.resultCurrency = this.currenciesService.currencyById(resultCurrencyElement.value);
+    this.resultCurrency = this.currenciesService.currencyById(Number.parseFloat(resultCurrencyElement.value));
   }
   public calculateResult(): number {
     const debit = this.recordHelper.getAvailableDebit(this.record);

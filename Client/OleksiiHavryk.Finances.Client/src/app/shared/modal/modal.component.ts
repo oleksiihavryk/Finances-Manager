@@ -2,9 +2,10 @@ import { Component, ElementRef, Input } from '@angular/core';
 import { IModal, ModalService } from './modal.service';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+    selector: 'app-modal',
+    templateUrl: './modal.component.html',
+    styleUrls: ['./modal.component.css'],
+    standalone: false
 })
 export class ModalComponent {
   @Input() public id: string = '';
