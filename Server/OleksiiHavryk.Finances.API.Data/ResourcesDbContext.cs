@@ -20,7 +20,7 @@ public class ResourcesDbContext : DbContext
         base.OnModelCreating(modelBuilder);
         
         modelBuilder.Entity<Entry>()
-            .Property(c => c.Count)
+            .Property(c => c.ItemPrice)
             .HasPrecision(
                 precision: 25,
                 scale: 10);

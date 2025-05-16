@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Record } from 'src/app/shared/domain/record';
 import $ from 'jquery';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Entry } from 'src/app/shared/domain/entry';
 import { CurrenciesService } from 'src/app/shared/services/currencies.service';
 import { RecordsService } from 'src/app/shared/services/records.service';
@@ -43,6 +43,11 @@ export class RecordComponent {
     Validators.required,
     Validators.maxLength(128)
   ]);
+  public countDebit: FormControl = new FormControl('', [
+    Validators.required,
+    Validators.min(1),
+    this.valueIsIntegerValidator
+  ]);
   public costDebit: FormControl = new FormControl('', [
     Validators.required,
     Validators.min(0)
@@ -53,6 +58,11 @@ export class RecordComponent {
   public nameCredit: FormControl = new FormControl('', [
     Validators.required,
     Validators.maxLength(128)
+  ]);
+  public countCredit: FormControl = new FormControl('', [
+    Validators.required,
+    Validators.min(0),
+    this.valueIsIntegerValidator
   ]);
   public costCredit: FormControl = new FormControl('', [
     Validators.required,
@@ -65,11 +75,13 @@ export class RecordComponent {
   public debitForm: FormGroup = new FormGroup({
     nameDebit: this.nameDebit,
     costDebit: this.costDebit,
+    countDebit: this.countDebit,
     currencyDebit: this.currencyDebit
   });
   public creditForm: FormGroup = new FormGroup({
     nameCredit: this.nameCredit,
     costCredit: this.costCredit,
+    countCredit: this.countCredit,
     currencyCredit: this.currencyCredit
   });
 
@@ -109,7 +121,8 @@ export class RecordComponent {
       recordId: this.record.id,
       currencyId: this.currenciesService.currencies.filter(c => c.name === this.currencyDebit.value)[0].id,
       name: this.nameDebit.value,
-      count: this.costDebit.value,
+      count: this.countDebit.value,
+      itemPrice: this.costDebit.value,
       type: 1
     };
 
@@ -125,6 +138,9 @@ export class RecordComponent {
 
     this.costDebit.setValue('');
     this.costDebit.markAsUntouched();
+
+    this.countDebit.setValue('');
+    this.countDebit.markAsUntouched();
 
     this.currencyDebit.setValue('');
     this.currencyDebit.markAsUntouched();
@@ -147,7 +163,8 @@ export class RecordComponent {
       recordId: this.record.id,
       currencyId: this.currenciesService.currencies.filter(c => c.name === this.currencyCredit.value)[0].id,
       name: this.nameCredit.value,
-      count: this.costCredit.value,
+      count: this.countCredit.value,
+      itemPrice: this.costCredit.value,
       type: 2
     };
     
@@ -163,6 +180,10 @@ export class RecordComponent {
 
     this.costCredit.setValue('');
     this.costCredit.markAsUntouched();
+
+    this.countCredit.setValue('');
+    this.countCredit.markAsUntouched();
+
 
     this.currencyCredit.setValue('');
     this.currencyCredit.markAsUntouched();
@@ -182,27 +203,34 @@ export class RecordComponent {
   public changeCurrency(resultCurrencyElement: HTMLSelectElement) {
     this.resultCurrency = this.currenciesService.currencyById(Number.parseFloat(resultCurrencyElement.value));
   }
+  public calculateEntryTotalPrice(entry: Entry) {
+    return entry.itemPrice * entry.count;
+  }
   public calculateResult(): number {
     const debit = this.recordHelper.getAvailableDebit(this.record);
     const credit = this.recordHelper.getAvailableCredit(this.record);
     const resCurr = this.resultCurrency;
   
     const debitMap = debit.map(v => {
+      var price = this.calculateEntryTotalPrice(v);
+
       if (resCurr.id == v.currencyId) {
-        return v.count * 1;
+        return price * 1;
       } else {
         var currency = this.currenciesService.currencyById(v.currencyId);
-        return v.count * (currency.value / resCurr.value)
+        return price * (currency.value / resCurr.value)
       }
     });
     const debitTotal = debitMap.length > 0 ? debitMap.reduce((s, c) => s + c) : 0;
     
     const creditMap = credit.map(v => {
+      var price = this.calculateEntryTotalPrice(v);
+
       if (resCurr.id == v.currencyId) {
-        return v.count * 1;
+        return price * 1;
       } else {
         var currency = this.currenciesService.currencyById(v.currencyId);
-        return v.count * (currency.value / resCurr.value)
+        return price * (currency.value / resCurr.value)
       }
     });
     const creditTotal = creditMap.length > 0 ? creditMap.reduce((s, c) => s + c) : 0;
@@ -216,5 +244,12 @@ export class RecordComponent {
   }
   public isHidden(entry: Entry) {
     return this.recordHelper.isHidden(entry);
+  }
+  private valueIsIntegerValidator(control: AbstractControl): ValidationErrors | null {
+    const val = Number.parseFloat(control.value as string);
+    const roundedVal = Math.round(val);
+    const isForbidden = roundedVal !== val;
+
+    return isForbidden ? { valueIsInteger: { actualValue: control.value as string } } : null;
   }
 }

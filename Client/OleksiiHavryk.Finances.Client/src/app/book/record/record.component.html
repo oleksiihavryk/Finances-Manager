@@ -21,7 +21,12 @@
                             [ngClass]="{'text-secondary': isHidden(debitEntry)}">
                             <span>{{debitEntry.name}}</span>
                             <span>
-                                <span>{{debitEntry.count}}{{currenciesService.currencyById(debitEntry.currencyId).symbol}}</span>
+                                <span>
+                                    {{debitEntry.count}}x for 
+                                    {{debitEntry.itemPrice}}{{currenciesService.currencyById(debitEntry.currencyId).symbol}} 
+                                    by Total Price: 
+                                    {{this.calculateEntryTotalPrice(debitEntry)}}{{currenciesService.currencyById(debitEntry.currencyId).symbol}}
+                                </span>
                                 <button class="mx-1 btn btn-sm btn-primary text-white" (click)="toggleEntryVisibility(debitEntry)">
                                     <i [ngClass]="{
                                         'bi-eye': isHidden(debitEntry), 
@@ -50,7 +55,12 @@
                             [ngClass]="{'text-secondary': isHidden(creditEntry)}">
                             <span>{{creditEntry.name}}</span>
                             <span>
-                                <span>{{creditEntry.count}}{{currenciesService.currencyById(creditEntry.currencyId).symbol}}</span>
+                                <span>
+                                    {{creditEntry.count}}x for 
+                                    {{creditEntry.itemPrice}}{{currenciesService.currencyById(creditEntry.currencyId).symbol}} 
+                                    by Total Price: 
+                                    {{this.calculateEntryTotalPrice(creditEntry)}}{{currenciesService.currencyById(creditEntry.currencyId).symbol}}
+                                </span>
                                 <button class="mx-1 btn btn-sm btn-primary text-white" (click)="toggleEntryVisibility(creditEntry)">
                                     <i [ngClass]="{
                                         'bi-eye': isHidden(creditEntry), 
@@ -76,7 +86,9 @@
                 <form class="p-2 m-auto">
                     <app-input [control]="nameDebit" type="text" name="Name">
                     </app-input>
-                    <app-input [control]="costDebit" type="number" name="Cost">
+                    <app-input [control]="costDebit" type="number" name="Cost of 1 Item">
+                    </app-input>
+                    <app-input [control]="countDebit" type="number" name="Count of Items">
                     </app-input>
                     <div class="form-group m-2">
                         <label>Choose currency</label>
@@ -103,7 +115,9 @@
                 <form class="p-2 m-auto">
                     <app-input [control]="nameCredit" type="text" name="Name">
                     </app-input>
-                    <app-input [control]="costCredit" type="number" name="Cost">
+                    <app-input [control]="costCredit" type="number" name="Cost of 1 Item">
+                    </app-input>
+                    <app-input [control]="countCredit" type="number" name="Count of Items">
                     </app-input>
                     <div class="form-group m-2">
                         <label>Choose currency</label>

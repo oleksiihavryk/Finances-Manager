@@ -8,6 +8,7 @@ public class Entry
     public Guid RecordId { get; set; }
     public int CurrencyId { get; set; }
     public string Name { get; set; } = null!;
-    public decimal Count { get; set; }
+    public int Count { get; set; }
+    public decimal ItemPrice { get; set; }
     public EntryType Type { get; set; }
 }

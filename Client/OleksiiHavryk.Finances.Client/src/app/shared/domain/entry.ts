@@ -4,5 +4,6 @@ export interface Entry {
     currencyId: number
     name: string
     count: number
+    itemPrice: number
     type: number
 }

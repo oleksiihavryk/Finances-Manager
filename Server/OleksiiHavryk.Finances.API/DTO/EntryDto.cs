@@ -14,6 +14,7 @@ public class EntryDto
     [Required]
     [MaxLength(128)]
     public string Name { get; set; } = null!;
-    [Required] public decimal Count { get; set; }
+    [Required] public int Count { get; set; }
+    [Required] public decimal ItemPrice { get; set; }
     [Required] public EntryType Type { get; set; }
 }

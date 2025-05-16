@@ -12,11 +12,11 @@
             control.valid === false,
             }">
             <div *ngIf="control.touched && control.dirty" class="text-danger">
-                <p *ngIf="control.errors?.required">
+                <p *ngIf="control.errors?.required" class="m-0">
                     This field is required!
                 </p>
                 <p *ngIf="control.errors?.maxlength !== null && 
-                    control.errors?.maxlength !== undefined">
+                    control.errors?.maxlength !== undefined" class="m-0">
                     This value has a length of 
                     {{control.errors?.maxlength.actualLength}} symbols
                     and cannot be more than 
@@ -63,6 +63,9 @@
                     control.errors?.pattern !== undefined && isPhonePattern()">
                     This value '{{control.errors?.pattern.actualValue}}' 
                     should match the Phone number pattern.
+                </p>
+                <p *ngIf="control.touched && control.dirty && control.errors?.valueIsInteger !== null">
+                    This value should be an integer.
                 </p>
             </div>
     </fieldset>
