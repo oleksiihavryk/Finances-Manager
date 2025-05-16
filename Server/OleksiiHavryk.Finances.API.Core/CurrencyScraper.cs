@@ -47,7 +47,9 @@ public class CurrencyScraper : ICurrencyScraper
             Id = 840,
             Name = "USD",
             Symbol = '$',
-            Value = Convert.ToDecimal(val.Replace(',', '.'))
+            Value = Convert.ToDecimal(
+                val.Replace(',', '.'), 
+                CultureInfo.GetCultureInfo("en-US"))
         };
     }
 
@@ -62,7 +64,9 @@ public class CurrencyScraper : ICurrencyScraper
             Id = 978,
             Name = "EUR",
             Symbol = '\u20ac',
-            Value = Convert.ToDecimal(val.Replace(',', '.'))
+            Value = Convert.ToDecimal(
+                val.Replace(',', '.'), 
+                CultureInfo.GetCultureInfo("en-US"))
         };
     } 
 }
