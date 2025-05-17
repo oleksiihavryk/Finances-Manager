@@ -24,7 +24,7 @@
                     symbols.
                 </p>
                 <p *ngIf="control.errors?.minlength !== null && 
-                    control.errors?.minlength !== undefined">
+                    control.errors?.minlength !== undefined" class="m-0">
                     This value has a length of 
                     {{control.errors?.minlength.actualLength}} symbols
                     and cannot be less than 
@@ -32,40 +32,41 @@
                     symbols.
                 </p>
                 <p *ngIf="control.errors?.min !== null && 
-                    control.errors?.min !== undefined">
+                    control.errors?.min !== undefined" class="m-0">
                     This value '{{control.errors?.min.actual}}' 
                     cannot be less than 
                     {{control.errors?.min.min}}
                 </p>
                 <p *ngIf="control.errors?.max !== null && 
-                    control.errors?.max !== undefined">
+                    control.errors?.max !== undefined" class="m-0">
                     This value '{{control.errors?.max.actual}}' 
                     cannot be greater than 
                     {{control.errors?.max.max}}
                 </p>
                 <p *ngIf="control.errors?.max !== null && 
-                    control.errors?.max !== undefined">
+                    control.errors?.max !== undefined" class="m-0">
                     This value '{{control.errors?.max.actual}}' 
                     cannot be greater than 
                     {{control.errors?.max.max}}
                 </p>
                 <p *ngIf="control.errors?.pattern !== null && 
-                    control.errors?.pattern !== undefined && isUrlPattern()">
+                    control.errors?.pattern !== undefined && isUrlPattern()" class="m-0">
                     This value '{{control.errors?.pattern.actualValue}}' 
                     should match the URL pattern.
                 </p>
                 <p *ngIf="control.errors?.pattern !== null && 
-                    control.errors?.pattern !== undefined && isEmailPattern()">
+                    control.errors?.pattern !== undefined && isEmailPattern()" class="m-0">
                     This value '{{control.errors?.pattern.actualValue}}' 
                     should match the Email pattern.
                 </p>
                 <p *ngIf="control.errors?.pattern !== null && 
-                    control.errors?.pattern !== undefined && isPhonePattern()">
+                    control.errors?.pattern !== undefined && isPhonePattern()" class="m-0">
                     This value '{{control.errors?.pattern.actualValue}}' 
                     should match the Phone number pattern.
                 </p>
-                <p *ngIf="control.touched && control.dirty && control.errors?.valueIsInteger !== null">
-                    This value should be an integer.
+                <p *ngIf="control.errors?.valueIsInteger !== null && 
+                    control.errors?.valueIsInteger !== undefined" class="m-0">
+                    This value should be an integer!
                 </p>
             </div>
     </fieldset>
